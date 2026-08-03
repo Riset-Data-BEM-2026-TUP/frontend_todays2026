@@ -1,0 +1,19 @@
+# Jangan ikutkan artefak host ke build context
+node_modules
+.next
+out
+build
+.git
+.gitignore
+.env
+.env.local
+.env.*.local
+*.log
+Dockerfile
+.dockerignore
+README.md
+# Service worker hasil build (akan di-generate ulang di dalam image)
+public/sw.js
+public/sw.js.map
+public/workbox-*.js
+public/workbox-*.js.map
