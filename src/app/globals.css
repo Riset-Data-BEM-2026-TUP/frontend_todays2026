@@ -1,0 +1,84 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ===== Design tokens BHUMARA (palette SEKUNDER resmi) =====
+   Ditulis sebagai channel RGB agar bisa dipakai dengan alpha Tailwind. */
+:root {
+  --sage: 156 175 136;        /* #9CAF88 */
+  --forest: 101 112 74;       /* #65704A */
+  --forest-deep: 62 69 48;    /* #3E4530  (turunan gelap = primer sementara) */
+  --cream: 243 233 210;       /* #F3E9D2 */
+  --sand: 205 185 138;        /* #CDB98A */
+  --rust: 180 106 50;         /* #B46A32  (CTA / highlight) */
+  --ink: 38 42 28;            /* teks utama di atas cream */
+
+  --font-display: 'Spicy Rice';
+  --font-body: 'Noto Serif';
+}
+
+.dark {
+  --cream: 26 30 20;
+  --ink: 235 232 220;
+  --sand: 120 108 78;
+}
+
+html {
+  font-size: 16px; /* Standard UX base font size (1rem = 16px) */
+}
+
+html.lenis, html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+body {
+  background-color: rgb(var(--cream));
+  color: rgb(var(--ink));
+  font-family: var(--font-body), Georgia, 'Times New Roman', serif;
+  /* Noto Serif = serif: butuh leading lebih longgar di layar (best practice 1.5–1.75) */
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* ===== Penyesuaian tipografi untuk pasangan font baru =====
+   Headline: Spicy Rice (display tebal, lebar, single-weight 400) */
+@layer base {
+  .font-display {
+    /* Leading rapat khas display heading (skala 1.0–1.2) */
+    line-height: 1.12;
+    /* Tracking positif: beri ruang antar huruf yang gemuk (lawan dari tracking-tight) */
+    letter-spacing: 0.01em;
+    /* Spicy Rice hanya punya weight 400 → netralkan faux-bold agar tidak "belepotan" */
+    font-weight: 400 !important;
+  }
+
+  /* Teks bacaan (paragraf) dengan Noto Serif tetap nyaman & konsisten */
+  p {
+    line-height: 1.7;
+  }
+}
+
+/* Pola latar belakang halus */
+.bhumara-pattern-bg {
+  background-image: radial-gradient(rgba(101, 112, 74, 0.15) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+/* Aksesibilitas: hormati prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+}
