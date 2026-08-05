@@ -1,11 +1,13 @@
 'use client';
 
 import { AnimatedSection, TextReveal, GlowCard } from '@/components/ui/animated-section';
+import { PageDecor } from '@/components/ui/jungle-decor';
 import { Mail, MapPin, Instagram, MessageCircle, Clock, ExternalLink } from 'lucide-react';
 
 export default function ContactPage() {
   return (
-    <div className="mx-auto max-w-5xl px-4 sm:px-6 pt-28 sm:pt-32 pb-24">
+    <div className="relative mx-auto max-w-5xl px-4 sm:px-6 pt-28 sm:pt-32 pb-24">
+      <PageDecor critter="gajah" />
       {/* Header */}
       <AnimatedSection>
         <span className="font-display text-xs font-bold uppercase tracking-widest text-rust">
