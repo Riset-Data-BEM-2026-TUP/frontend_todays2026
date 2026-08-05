@@ -5,6 +5,8 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { motion, AnimatePresence, animate } from 'framer-motion';
 import { FloatingOrbs, TextReveal, FloatingBadge } from '@/components/ui/animated-section';
+import { AtmosphericHeroBackground } from '@/components/ui/atmospheric-hero-background';
+import { Decor } from '@/components/ui/jungle-decor';
 import { ChevronDown } from 'lucide-react';
 
 interface FullpageHeroExperienceProps {
@@ -253,19 +255,9 @@ export function FullpageHeroExperience({
   return (
     <div
       ref={containerRef}
-      className="relative h-screen w-full overflow-hidden bg-forest-deep text-cream flex items-center justify-center select-none"
+      className="relative z-[101] h-screen w-full overflow-hidden text-ink flex items-center justify-center select-none"
     >
-      <FloatingOrbs />
-      <div className="pointer-events-none absolute inset-0 opacity-15 bhumara-pattern-bg" />
-
-      <motion.div
-        animate={{
-          scale: currentStep === 0 ? 1 : 1.2,
-          opacity: currentStep === 0 ? 0.35 : 0.7,
-        }}
-        transition={{ duration: 0.8, ease: 'easeInOut' }}
-        className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_center,_var(--tw-gradient-stops))] from-sage/30 via-forest-deep to-forest-deep"
-      />
+      <AtmosphericHeroBackground />
 
       <div className="relative z-10 mx-auto flex max-w-6xl w-full flex-col lg:flex-row items-center justify-between px-6 gap-8">
         {/* Emblem & Logo Stage */}
@@ -273,15 +265,15 @@ export function FullpageHeroExperience({
           <motion.div
             animate={{ rotate: currentStep * 90 }}
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-            className="absolute inset-0 rounded-full border-2 border-dashed border-sage/40"
+            className="absolute inset-0 rounded-full border-2 border-dashed border-forest-deep/30"
           />
           <motion.div
             animate={{ rotate: -currentStep * 90 }}
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-            className="absolute inset-5 rounded-full border border-rust/50"
+            className="absolute inset-5 rounded-full border border-rust/60"
           >
             <div className="absolute -top-2 left-1/2 -translate-x-1/2 size-4 rounded-full bg-rust shadow-[0_0_12px_#B46A32]" />
-            <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 size-4 rounded-full bg-sage shadow-[0_0_12px_#9CAF88]" />
+            <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 size-4 rounded-full bg-forest-deep shadow-[0_0_12px_#3E4530]" />
           </motion.div>
 
           <motion.div
@@ -302,7 +294,7 @@ export function FullpageHeroExperience({
               width={200}
               height={200}
               priority
-              className="w-36 sm:w-48 lg:w-56 drop-shadow-[0_15px_30px_rgba(0,0,0,0.65)]"
+              className="w-36 sm:w-48 lg:w-56 drop-shadow-[0_15px_30px_rgba(62,69,48,0.25)]"
             />
           </motion.div>
         </div>
@@ -323,25 +315,25 @@ export function FullpageHeroExperience({
                   <FloatingBadge text="PKKMB Telkom University Purwokerto 2026" />
                 </div>
 
-                <h1 className="font-display text-5xl font-extrabold tracking-widest sm:text-7xl lg:text-8xl bg-gradient-to-b from-cream via-cream to-sage/80 bg-clip-text text-transparent drop-shadow-md">
+                <h1 className="font-display text-5xl font-extrabold tracking-widest sm:text-7xl lg:text-8xl text-forest-deep drop-shadow-sm">
                   BHUMARA
                 </h1>
 
-                <p className="mt-3 text-lg sm:text-xl font-medium text-cream/90 leading-relaxed max-w-lg">
+                <p className="mt-3 text-lg sm:text-xl font-medium text-forest-deep/90 leading-relaxed max-w-lg">
                   <TextReveal text={tagline ?? 'Growing Today, Thriving Tomorrow'} delay={0.2} />
                 </p>
 
                 <div className="mt-8 flex flex-wrap justify-center lg:justify-start gap-4">
                   <Link
                     href="/login"
-                    className="inline-flex min-h-[48px] items-center justify-center rounded-full bg-rust px-8 py-3 text-base font-semibold text-cream shadow-[0_10px_25px_rgba(180,106,50,0.4)] hover:bg-rust/90 transition-all duration-300"
+                    className="inline-flex min-h-[48px] items-center justify-center rounded-full bg-rust px-8 py-3 text-base font-semibold text-cream shadow-[0_10px_25px_rgba(180,106,50,0.35)] hover:bg-rust/90 transition-all duration-300"
                   >
                     Login
                   </Link>
 
                   <button
                     onClick={() => handleStepChange('next')}
-                    className="inline-flex min-h-[48px] items-center justify-center rounded-full border border-cream/40 px-8 py-3 text-base font-semibold text-cream hover:bg-cream/10 backdrop-blur-md transition-all duration-300"
+                    className="inline-flex min-h-[48px] items-center justify-center rounded-full border border-forest-deep/35 px-8 py-3 text-base font-semibold text-forest-deep hover:bg-forest-deep/10 backdrop-blur-md transition-all duration-300"
                   >
                     Mulai Jelajah &rarr;
                   </button>
@@ -354,20 +346,23 @@ export function FullpageHeroExperience({
                 animate={{ opacity: 1, y: 0, scale: 1 }}
                 exit={{ opacity: 0, y: -35, scale: 0.95 }}
                 transition={{ duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
-                className="w-full flex flex-col justify-center rounded-3xl border border-cream/20 bg-cream/10 p-8 sm:p-10 backdrop-blur-xl shadow-2xl"
+                className="relative w-full flex flex-col justify-center rounded-3xl border border-forest-deep/15 bg-cream/75 p-8 sm:p-10 backdrop-blur-xl shadow-xl"
               >
-                <div className="flex items-center justify-between border-b border-cream/15 pb-4 mb-4">
+                {/* Aksen dedaunan di pojok kanan atas box (pop-out) */}
+                <Decor name="Rectangle-12" className="absolute -right-6 -top-8 w-24 rotate-6 sm:w-28 opacity-90" />
+
+                <div className="flex items-center justify-between border-b border-forest-deep/15 pb-4 mb-4">
                   <span className="font-display text-xs font-extrabold uppercase tracking-widest text-rust">
                     NILAI DASAR BHUMARA
                   </span>
-                  <span className="font-display text-2xl font-black text-sage/80">
+                  <span className="font-display text-2xl font-black text-forest-deep/70">
                     {steps[currentStep].num}
                   </span>
                 </div>
-                <h3 className="font-display text-3xl sm:text-4xl font-black text-cream">
+                <h3 className="font-display text-3xl sm:text-4xl font-black text-forest-deep">
                   {steps[currentStep].title}
                 </h3>
-                <p className="mt-4 text-base sm:text-lg text-cream/90 font-medium leading-relaxed">
+                <p className="mt-4 text-base sm:text-lg text-forest-deep/90 font-medium leading-relaxed">
                   {steps[currentStep].text ?? '—'}
                 </p>
               </motion.div>
@@ -385,14 +380,14 @@ export function FullpageHeroExperience({
             className="group relative flex items-center justify-end"
             aria-label={`Ke Step ${s.label || s.title}`}
           >
-            <span className="absolute right-7 rounded-md bg-forest-deep/90 border border-cream/20 px-2.5 py-1 text-xs font-bold text-cream opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">
+            <span className="absolute right-7 rounded-md bg-forest-deep border border-cream/20 px-2.5 py-1 text-xs font-bold text-cream opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none shadow-md">
               {s.title || 'Banner Utama'}
             </span>
             <span
               className={`size-3.5 rounded-full border transition-all duration-300 ${
                 currentStep === idx
                   ? 'border-rust bg-rust scale-125 shadow-[0_0_10px_#B46A32]'
-                  : 'border-cream/40 bg-cream/20 hover:bg-cream/50'
+                  : 'border-forest-deep/40 bg-forest-deep/20 hover:bg-forest-deep/50'
               }`}
             />
           </button>
@@ -404,7 +399,7 @@ export function FullpageHeroExperience({
         onClick={() => handleStepChange('next')}
         animate={{ y: [0, 6, 0] }}
         transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
-        className="absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 text-xs font-bold uppercase tracking-wider text-cream/70 hover:text-cream transition-colors z-20 cursor-pointer"
+        className="absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 text-xs font-bold uppercase tracking-wider text-forest-deep/80 hover:text-forest-deep transition-colors z-20 cursor-pointer"
       >
         <span>
           {currentStep === steps.length - 1 ? 'Lanjut Ke Fitur PKKMB' : 'Scroll / Klik Untuk Lanjut'}
