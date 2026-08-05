@@ -45,10 +45,22 @@ html.lenis, html.lenis body {
 
 body {
   background-color: rgb(var(--cream));
+  /* Pola dedaunan berulang sebagai tekstur latar, SANGAT dipudarkan:
+     overlay cream ~93% ditumpuk di atas gambar → pola hanya samar-samar (±7%).
+     Pakai Rectangle-vtile.png = Rectangle.png + salinan flip-vertikal di bawahnya,
+     sehingga tiap baris berselang-seling ter-flip & MENYAMBUNG mulus ke bawah.
+     Pakai token --cream agar ikut menyesuaikan di dark mode. */
+  background-image:
+    linear-gradient(rgb(var(--cream) / 0.93), rgb(var(--cream) / 0.93)),
+    url('/images/decorations/Rectangle-vtile.png');
+  background-repeat: repeat;
+  background-size: 300px auto;
   color: rgb(var(--ink));
   font-family: var(--font-body), Georgia, 'Times New Roman', serif;
   /* Noto Serif = serif: butuh leading lebih longgar di layar (best practice 1.5–1.75) */
   line-height: 1.7;
+  /* Cegah scroll horizontal dari lapisan dekor full-bleed (w-screen). */
+  overflow-x: clip;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
@@ -78,7 +90,13 @@ body {
   background-size: 24px 24px;
 }
 
-/* Aksesibilitas: hormati prefers-reduced-motion */
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+/* Sembunyikan scrollbar di seluruh elemen bertanda no-scrollbar */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+  width: 0;
+  height: 0;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
