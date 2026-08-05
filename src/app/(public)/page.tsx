@@ -1,19 +1,21 @@
 import Link from 'next/link';
 import { Compass, Clapperboard, BookOpen, Gamepad2, HelpCircle } from 'lucide-react';
 import { FullpageHeroExperience } from '@/components/landing/fullpage-hero-experience';
-import { TimelineList } from '@/components/timeline/timeline-list';
+import { SuasanaKampusGallery } from '@/components/landing/suasana-kampus-gallery';
+import { ExpandingTimelineGrid } from '@/components/timeline/expanding-timeline-grid';
 import { FaqAccordion } from '@/components/ui/faq-accordion';
 import { AnimatedSection, StaggerContainer, StaggerItem, GlowCard, TextReveal } from '@/components/ui/animated-section';
+import { FaunaBand, FloatingLeaves, Decor, EdgeCritter, EdgeDecor, JungleCornersTop } from '@/components/ui/jungle-decor';
 import { getSettings } from '@/lib/api/queries';
 
 // Revalidate berkala: cepat (ISR) tapi tetap dinamis dari CMS.
 export const revalidate = 60;
 
 const features = [
-  { href: '/campus-tour', label: 'Campus Tour', desc: 'Jelajahi denah & fasilitas kampus secara interaktif', icon: Compass },
+  { href: '/academic', label: 'Platform Akademik', desc: 'Akses portal iGracias, CeLOE LMS, OpenLibrary & Office 365', icon: Compass },
   { href: '/explore-ormawa', label: 'Explore Ormawa', desc: 'Mengenal organisasi & UKM di Telkom University Purwokerto', icon: Clapperboard },
+  { href: '/campus-tour', label: 'Campus Tour', desc: 'Jelajahi denah & fasilitas kampus secara interaktif', icon: Compass },
   { href: '/guidebook', label: 'Guidebook', desc: 'Panduan lengkap & tata tertib pelaksanaan PKKMB', icon: BookOpen },
-  { href: '/roblox', label: 'Roblox Experience', desc: 'Pengalaman metaverse peta virtual kampus Telkom', icon: Gamepad2 },
   { href: '/quiz', label: 'Quiz PKKMB', desc: 'Uji pengetahuan seputar Wawasan Kebangsaan & Kampus', icon: Gamepad2 },
   { href: '/faq', label: 'FAQ', desc: 'Pertanyaan yang sering diajukan seputar kegiatan', icon: HelpCircle },
 ];
@@ -38,8 +40,13 @@ export default async function LandingPage() {
       />
 
       {/* Highlight feature (Full-Screen Coverage Section) */}
-      <section id="features-section" className="bg-sage/15 min-h-screen flex flex-col justify-center py-20 sm:py-28 border-y border-sand/40 relative">
-        <div className="mx-auto max-w-6xl px-4 sm:px-6 w-full">
+      <section id="features-section" className="relative overflow-hidden bg-sage/15 min-h-screen flex flex-col justify-center py-20 sm:py-28 border-y border-sand/40">
+        {/* Sudut bingkai dedaunan menempel di pojok atas kiri & kanan section ini */}
+        <JungleCornersTop />
+        <FloatingLeaves />
+        <Decor name="pohon" className="absolute -right-6 bottom-0 hidden w-44 opacity-100 md:block" />
+        <Decor name="harimau" className="absolute bottom-0 left-1 hidden h-52 w-auto opacity-100 lg:block" />
+        <div className="relative mx-auto max-w-6xl px-4 sm:px-6 w-full">
           <AnimatedSection>
             <div className="max-w-2xl">
               <h2 className="font-display text-3xl text-forest-deep sm:text-4xl">
@@ -54,7 +61,7 @@ export default async function LandingPage() {
           <StaggerContainer className="mt-12 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {features.map(({ href, label, desc, icon: Icon }) => (
               <StaggerItem key={href}>
-                <GlowCard className="h-full p-0">
+                <GlowCard className="h-full p-0" corner="Rectangle-25">
                   <Link
                     href={href}
                     className="group flex flex-col justify-between h-full p-6 sm:p-7"
@@ -83,15 +90,19 @@ export default async function LandingPage() {
         </div>
       </section>
 
+      <FaunaBand />
+
       {/* Ringkasan timeline */}
-      <section className="mx-auto max-w-6xl px-4 sm:px-6 py-20 sm:py-28">
-        <AnimatedSection className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
+      <section className="relative overflow-hidden mx-auto max-w-6xl px-4 sm:px-6 py-20 sm:py-28">
+        <FloatingLeaves />
+        <EdgeCritter name="rusa" side="right" />
+        <AnimatedSection className="relative flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8">
           <div className="max-w-2xl">
             <h2 className="font-display text-3xl font-extrabold text-forest-deep sm:text-4xl tracking-tight">
               <TextReveal text="Rangkaian Acara TODAYS" />
             </h2>
             <p className="mt-3 text-base sm:text-lg text-forest/90 font-medium leading-relaxed">
-              Jadwal & tahapan kegiatan mahasiswa baru Telkom University Purwokerto.
+              Jadwal & tahapan kegiatan mahasiswa baru Telkom University Purwokerto. Klik setiap hari untuk detail rincian.
             </p>
           </div>
           <Link
@@ -102,13 +113,20 @@ export default async function LandingPage() {
           </Link>
         </AnimatedSection>
 
-        <AnimatedSection delay={0.2} className="mt-12">
-          <TimelineList />
+        <AnimatedSection delay={0.2} className="mt-6">
+          <ExpandingTimelineGrid showHeader={false} />
         </AnimatedSection>
       </section>
 
+      {/* Potongan Suasana Kampus (Gallery) - Dark Theme Section */}
+      <SuasanaKampusGallery />
+
       {/* FAQ singkat */}
-      <section className="mx-auto max-w-4xl px-4 sm:px-6 pb-20 sm:pb-28">
+      <section className="relative overflow-hidden mx-auto max-w-4xl px-4 sm:px-6 pt-20 sm:pt-28 pb-32 sm:pb-40 min-h-dvh">
+        <EdgeDecor className="inset-y-0">
+          <Decor name="matahari" className="absolute -right-12 top-2 w-44 opacity-100" />
+        </EdgeDecor>
+        <FloatingLeaves />
         <AnimatedSection>
           <div className="max-w-2xl mx-auto text-center">
             <h2 className="font-display text-3xl font-extrabold text-forest-deep sm:text-4xl tracking-tight">
@@ -120,7 +138,7 @@ export default async function LandingPage() {
           </div>
         </AnimatedSection>
 
-        <AnimatedSection delay={0.2} className="mt-12">
+        <AnimatedSection delay={0.2} className="mt-12 min-h-[920px] pb-12">
           <FaqAccordion />
         </AnimatedSection>
       </section>

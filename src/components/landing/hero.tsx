@@ -3,17 +3,16 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
-import { FloatingOrbs, TextReveal, FloatingBadge } from '@/components/ui/animated-section';
+import { TextReveal, FloatingBadge } from '@/components/ui/animated-section';
+import { AtmosphericHeroBackground } from '@/components/ui/atmospheric-hero-background';
 
 export function Hero({ tagline }: { tagline?: string }) {
   return (
-    <section className="relative overflow-hidden bg-forest-deep text-cream min-h-[85vh] flex items-center justify-center py-20 sm:py-28">
-      {/* Dynamic Ambient Floating Particles & Pattern Mesh */}
-      <FloatingOrbs />
-      <div className="pointer-events-none absolute inset-0 opacity-15 bhumara-pattern-bg" />
+    <section className="relative overflow-hidden text-ink min-h-[85vh] flex items-center justify-center py-20 sm:py-28">
+      <AtmosphericHeroBackground />
 
       <div className="relative z-10 mx-auto flex max-w-5xl flex-col items-center px-4 sm:px-6 text-center">
-        {/* Floating Badge (PIONIR UGM inspired status pill) */}
+        {/* Floating Badge */}
         <div className="mb-6">
           <FloatingBadge text="PKKMB Telkom University Purwokerto 2026" />
         </div>
@@ -32,7 +31,7 @@ export function Hero({ tagline }: { tagline?: string }) {
               opacity: [0.3, 0.6, 0.3],
             }}
             transition={{ duration: 3.5, repeat: Infinity, ease: 'easeInOut' }}
-            className="absolute -inset-6 rounded-full bg-gradient-to-r from-sage via-cream/40 to-rust opacity-40 blur-3xl group-hover:opacity-80 transition-opacity"
+            className="absolute -inset-6 rounded-full bg-gradient-to-r from-sage via-sand/40 to-rust opacity-40 blur-3xl group-hover:opacity-80 transition-opacity"
           />
 
           {/* Continuous Sinusoidal Floating Motion */}
@@ -54,7 +53,7 @@ export function Hero({ tagline }: { tagline?: string }) {
               width={150}
               height={150}
               priority
-              className="relative drop-shadow-[0_20px_40px_rgba(0,0,0,0.55)] transition-transform duration-300 group-hover:scale-105"
+              className="relative drop-shadow-[0_20px_40px_rgba(62,69,48,0.25)] transition-transform duration-300 group-hover:scale-105"
             />
           </motion.div>
         </motion.div>
@@ -65,7 +64,7 @@ export function Hero({ tagline }: { tagline?: string }) {
             initial={{ y: 50, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ delay: 0.2, duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-            className="font-display text-5xl font-extrabold tracking-widest sm:text-7xl lg:text-8xl bg-gradient-to-b from-cream via-cream to-sage/80 bg-clip-text text-transparent drop-shadow-md"
+            className="font-display text-5xl font-extrabold tracking-widest sm:text-7xl lg:text-8xl text-forest-deep drop-shadow-sm"
           >
             BHUMARA
           </motion.h1>
@@ -73,7 +72,7 @@ export function Hero({ tagline }: { tagline?: string }) {
 
         {/* Subtitle Tagline */}
         <div className="mt-4 max-w-2xl mx-auto">
-          <p className="text-lg sm:text-2xl font-medium text-cream/90 tracking-wide leading-relaxed">
+          <p className="text-lg sm:text-2xl font-medium text-forest-deep/90 tracking-wide leading-relaxed">
             <TextReveal text={tagline ?? 'Growing Today, Thriving Tomorrow'} delay={0.4} />
           </p>
         </div>
@@ -92,7 +91,7 @@ export function Hero({ tagline }: { tagline?: string }) {
           >
             <Link
               href="/login"
-              className="relative inline-flex min-h-[50px] items-center justify-center rounded-full bg-rust px-8 py-3.5 text-base font-semibold text-cream shadow-[0_10px_25px_rgba(180,106,50,0.4)] hover:bg-rust/90 transition-all duration-300 overflow-hidden group"
+              className="relative inline-flex min-h-[50px] items-center justify-center rounded-full bg-rust px-8 py-3.5 text-base font-semibold text-cream shadow-[0_10px_25px_rgba(180,106,50,0.35)] hover:bg-rust/90 transition-all duration-300 overflow-hidden group"
             >
               <span className="relative z-10">Login</span>
               <div className="absolute inset-0 bg-gradient-to-r from-cream/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
@@ -106,7 +105,7 @@ export function Hero({ tagline }: { tagline?: string }) {
           >
             <Link
               href="/timeline"
-              className="inline-flex min-h-[50px] items-center justify-center rounded-full border border-cream/40 px-8 py-3.5 text-base font-semibold text-cream hover:bg-cream/10 hover:border-cream/70 backdrop-blur-md transition-all duration-300"
+              className="inline-flex min-h-[50px] items-center justify-center rounded-full border border-forest-deep/35 px-8 py-3.5 text-base font-semibold text-forest-deep hover:bg-forest-deep/10 hover:border-forest-deep/70 backdrop-blur-md transition-all duration-300"
             >
               Jelajahi Website &rarr;
             </Link>

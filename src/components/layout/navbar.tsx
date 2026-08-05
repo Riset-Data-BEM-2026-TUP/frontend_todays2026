@@ -10,6 +10,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 const links = [
   { href: '/timeline', label: 'Timeline' },
   { href: '/explore-ormawa', label: 'Ormawa' },
+  { href: '/academic', label: 'Akademik' },
   { href: '/campus-tour', label: 'Campus Tour' },
   { href: '/faq', label: 'FAQ' },
   { href: '/contact', label: 'Kontak' },
@@ -24,7 +25,7 @@ export function Navbar() {
       initial={{ y: -30, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-      className="fixed top-3 sm:top-5 left-0 right-0 z-40 mx-auto max-w-5xl px-3 sm:px-4"
+      className="fixed top-3 sm:top-5 left-0 right-0 z-[1000] mx-auto max-w-5xl px-3 sm:px-4"
     >
       {/* Floating Glassmorphism Pill Container */}
       <div className="relative rounded-2xl border border-sand/50 bg-cream/85 px-4 sm:px-6 py-2.5 shadow-lg shadow-forest-deep/5 backdrop-blur-xl transition-all duration-300">
