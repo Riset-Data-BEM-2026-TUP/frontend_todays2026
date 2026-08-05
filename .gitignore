@@ -3,6 +3,9 @@
 .pnp
 .pnp.js
 
+# Sumber aset mentah di root (duplikat) — yang dipakai ada di /public/images/decorations
+/asset-pkkmb/
+
 # ===== Next.js build output =====
 /.next/
 /out/

@@ -12,11 +12,14 @@ export function PageTransition({ children }: { children: React.ReactNode }) {
   // wrapper terjebak di state initial (opacity: 0) dan SELURUH halaman kosong.
   // Dengan `key={pathname}` pada motion.div biasa, React me-remount subtree
   // tiap navigasi → animasi enter (mount) selalu jalan → konten pasti tampil.
+  // Hanya animasikan opacity (TANPA transform). Transform y akan meninggalkan
+  // `transform` permanen → membuat stacking context yang "memenjarakan" hero,
+  // sehingga hero tak bisa berada di atas <JungleFrame /> (z-100). Fade saja aman.
   return (
     <motion.div
       key={pathname}
-      initial={{ opacity: 0, y: 14 }}
-      animate={{ opacity: 1, y: 0 }}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
       transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
     >
       {children}

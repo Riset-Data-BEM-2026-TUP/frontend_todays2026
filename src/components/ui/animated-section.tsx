@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import { motion, HTMLMotionProps } from 'framer-motion';
+import { Decor } from './jungle-decor';
 
 interface AnimatedSectionProps extends HTMLMotionProps<'div'> {
   children: React.ReactNode;
@@ -116,9 +117,12 @@ export function StaggerItem({
 export function GlowCard({
   children,
   className = '',
+  corner,
 }: {
   children: React.ReactNode;
   className?: string;
+  /** Nama aset bunga (opsional) untuk aksen pojok kanan atas kartu. */
+  corner?: string;
 }) {
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
   const [isHovered, setIsHovered] = useState(false);
@@ -139,8 +143,14 @@ export function GlowCard({
       whileHover={{ y: -6, scale: 1.025 }}
       whileTap={{ scale: 0.96, rotate: -0.5 }}
       transition={{ type: 'spring', stiffness: 380, damping: 22 }}
-      className={`relative overflow-hidden rounded-2xl border border-sand/60 bg-cream p-6 shadow-sm transition-colors duration-300 hover:border-rust/70 hover:shadow-xl ${className}`}
+      className={`relative ${corner ? 'overflow-visible' : 'overflow-hidden'} rounded-2xl border border-sand/60 bg-cream p-6 shadow-sm transition-colors duration-300 hover:border-rust/70 hover:shadow-xl ${className}`}
     >
+      {/* Aksen tumbuhan menempel di TEPI KANAN kartu sendiri, menjuntai ke dalam, dan
+          pop-out (tidak di-clip) ke ATAS. Di belakang konten. */}
+      {corner && (
+        <Decor name={corner} className="absolute right-0 -top-6 w-36 opacity-95 sm:w-40" />
+      )}
+
       {/* Dynamic Mouse Spotlight Glow */}
       {isHovered && (
         <div
