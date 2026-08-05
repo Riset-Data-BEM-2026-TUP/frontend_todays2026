@@ -1,17 +1,20 @@
 import type { Metadata } from 'next';
+import Image from 'next/image';
 import { AnimatedSection, TextReveal, GlowCard } from '@/components/ui/animated-section';
-import { UserCheck, ShieldAlert } from 'lucide-react';
+import { PageDecor } from '@/components/ui/jungle-decor';
+import { ShieldAlert } from 'lucide-react';
 import { LoginForm } from './login-form';
 
 export const metadata: Metadata = { title: 'Login Mahasiswa' };
 
 export default function LoginPage() {
   return (
-    <div className="mx-auto max-w-md px-4 sm:px-6 pt-28 sm:pt-32 pb-24">
+    <div className="relative mx-auto max-w-md px-4 sm:px-6 pt-28 sm:pt-32 pb-24">
+      <PageDecor />
       <AnimatedSection>
         <div className="text-center">
-          <div className="mx-auto size-12 rounded-2xl bg-rust/15 border border-rust/30 flex items-center justify-center mb-3">
-            <UserCheck size={24} className="text-rust" />
+          <div className="mx-auto mb-3 flex size-16 items-center justify-center rounded-2xl border border-sand/60 bg-cream shadow-sm">
+            <Image src="/logo-pkkmb.png" alt="Logo BHUMARA" width={44} height={44} className="drop-shadow-sm" />
           </div>
           <span className="font-display text-xs font-bold uppercase tracking-widest text-rust">
             PORTAL MAHASISWA BARU
