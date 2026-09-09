@@ -2,114 +2,40 @@
 
 import { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
 import anime from 'animejs';
-import {
-  Camera,
-  Sparkles,
-  Maximize2,
-  X,
-  Calendar,
-  Tag,
-  ChevronRight,
-  Compass,
-  Users,
-  Award,
-} from 'lucide-react';
+import { Maximize2, X, Calendar, ChevronRight } from 'lucide-react';
 import { FloatingLeaves, Decor } from '@/components/ui/jungle-decor';
 
-export interface GalleryItem {
-  id: string;
-  title: string;
-  category: 'campus-tour' | 'expo-ormawa' | 'inagurasi' | 'kebersamaan';
-  categoryLabel: string;
-  date: string;
-  image: string;
-  description: string;
-  aspect: 'tall' | 'wide' | 'square';
-}
+import type { GalleryItem } from '@/lib/api/queries';
+export type { GalleryItem };
 
-const galleryData: GalleryItem[] = [
-  {
-    id: '1',
-    title: 'Upacara Pembukaan & Welcoming PKKMB 2026',
-    category: 'inagurasi',
-    categoryLabel: 'Inagurasi',
-    date: '12 Agustus 2026',
-    image: 'https://images.unsplash.com/photo-1523580494863-6f3031224c94?q=80&w=1200',
-    description: 'Kemeriahan pembukaan PKKMB BHUMARA 2026 disambut antusias oleh ribuan mahasiswa baru Telkom University Purwokerto.',
-    aspect: 'wide',
-  },
-  {
-    id: '2',
-    title: 'Eksplorasi Gedung Rektorat & Fasilitas Kampus',
-    category: 'campus-tour',
-    categoryLabel: 'Campus Tour',
-    date: '12 Agustus 2026',
-    image: 'https://images.unsplash.com/photo-1541829070764-84a7d30dd3f3?q=80&w=1200',
-    description: 'Mahasiswa baru menjelajahi laboratorium, perpustakaan digital, dan zona akademik terpadu.',
-    aspect: 'tall',
-  },
-  {
-    id: '3',
-    title: 'Panggung Unjuk Bakat & Expo Ormawa',
-    category: 'expo-ormawa',
-    categoryLabel: 'Expo Ormawa',
-    date: '14 Agustus 2026',
-    image: 'https://images.unsplash.com/photo-1511632765486-a01980e01a18?q=80&w=1200',
-    description: 'Demonstrasi atraktif dari puluhan UKM, BEM, dan komunitas mahasiswa Telkom University Purwokerto.',
-    aspect: 'square',
-  },
-  {
-    id: '4',
-    title: 'Seminar Kebangsaan & Pembentukan Karakter',
-    category: 'kebersamaan',
-    categoryLabel: 'Kebersamaan',
-    date: '13 Agustus 2026',
-    image: 'https://images.unsplash.com/photo-1475721027785-f74eccf877e2?q=80&w=1200',
-    description: 'Sesi inspiratif pembekalan wawasan kebangsaan, moderasi beragama, dan kepemimpinan muda.',
-    aspect: 'square',
-  },
-  {
-    id: '5',
-    title: 'Momen Hangat Kebersamaan Kelompok Rimbawan',
-    category: 'kebersamaan',
-    categoryLabel: 'Kebersamaan',
-    date: '13 Agustus 2026',
-    image: 'https://images.unsplash.com/photo-1529156069898-49953e39b3ac?q=80&w=1200',
-    description: 'Diskusi kelompok dan ice breaking yang mempererat tali silaturahmi antar mahasiswa baru.',
-    aspect: 'tall',
-  },
-  {
-    id: '6',
-    title: 'Malam Inagurasi & Selebrasi Api Unggun',
-    category: 'inagurasi',
-    categoryLabel: 'Inagurasi',
-    date: '15 Agustus 2026',
-    image: 'https://images.unsplash.com/photo-1562774053-701939374585?q=80&w=1200',
-    description: 'Puncak perayaan penyambutan keluarga baru BHUMARA dengan pertunjukan seni dan pesta kembang api.',
-    aspect: 'wide',
-  },
-];
-
-const categories = [
-  { id: 'all', label: 'Semua Momen' },
-  { id: 'campus-tour', label: 'Campus Tour' },
-  { id: 'expo-ormawa', label: 'Expo Ormawa' },
-  { id: 'inagurasi', label: 'Inagurasi' },
-  { id: 'kebersamaan', label: 'Kebersamaan' },
-];
-
-export function SuasanaKampusGallery() {
-  const [selectedCategory, setSelectedCategory] = useState<string>('all');
+/**
+ * Galeri "Potongan Suasana Kampus". Data foto + metadata (judul, deskripsi)
+ * berasal dari DB (Settings `gallery.campus`) dan dilewatkan sebagai prop dari
+ * server component halaman — TIDAK ada daftar file/caption hardcoded di sini.
+ *
+ * `preview` = true (default) → tampil 6 foto + tombol "Lihat semua" (dipakai di
+ * landing). `preview` = false → tampil SEMUA foto tanpa tombol (halaman /gallery).
+ */
+export function SuasanaKampusGallery({
+  items,
+  preview = true,
+  title = 'Potongan Suasana Kampus',
+  subtitle = 'Abadikan momen berharga, euforia kebersamaan, dan petualangan pertama Pejuang Rimba di Telkom University Purwokerto.',
+}: {
+  items: GalleryItem[];
+  preview?: boolean;
+  title?: string;
+  subtitle?: string;
+}) {
   const [activeItem, setActiveItem] = useState<GalleryItem | null>(null);
   const galleryRef = useRef<HTMLDivElement>(null);
   const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
 
-  const filteredData =
-    selectedCategory === 'all'
-      ? galleryData
-      : galleryData.filter((item) => item.category === selectedCategory);
+  const filteredData = items;
+  const previewData = preview ? filteredData.slice(0, 6) : filteredData;
 
   // Anime.js Staggered Entrance Animation when category changes
   useEffect(() => {
@@ -126,7 +52,7 @@ export function SuasanaKampusGallery() {
         duration: 700,
       });
     }
-  }, [selectedCategory]);
+  }, []);
 
   // Mousemove 3D Tilt calculation (Magnetic 3D card tilt effect)
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>, index: number) => {
@@ -186,35 +112,16 @@ export function SuasanaKampusGallery() {
       <div className="relative z-10 mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="flex flex-col items-center text-center max-w-3xl mx-auto">
-          <div className="inline-flex items-center gap-2 rounded-full border border-sand/30 bg-cream/10 px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-sand backdrop-blur-md mb-4 shadow-inner">
-            <Camera size={14} className="text-rust" />
-            <span>Dokumentasi Visual PKKMB</span>
-          </div>
 
           <h2 className="font-display text-4xl sm:text-5xl lg:text-6xl text-cream drop-shadow-md">
-            Potongan Suasana Kampus
+            {title}
           </h2>
 
           <p className="mt-4 text-base sm:text-lg text-cream/80 font-medium leading-relaxed">
-            Abadikan momen berharga, euforia kebersamaan, dan petualangan pertama Pejuang Rimba di Telkom University Purwokerto.
+            {subtitle}
           </p>
 
-          {/* Category Filter Pills */}
-          <div className="mt-8 flex flex-wrap justify-center gap-2.5 sm:gap-3">
-            {categories.map((cat) => (
-              <button
-                key={cat.id}
-                onClick={() => setSelectedCategory(cat.id)}
-                className={`relative rounded-full px-5 py-2 text-xs sm:text-sm font-extrabold transition-all duration-300 cursor-pointer ${
-                  selectedCategory === cat.id
-                    ? 'bg-rust text-cream shadow-[0_4px_20px_rgba(180,106,50,0.5)] scale-105'
-                    : 'bg-cream/10 text-cream/70 hover:bg-cream/20 hover:text-cream border border-cream/15'
-                }`}
-              >
-                {cat.label}
-              </button>
-            ))}
-          </div>
+
         </div>
 
         {/* Gallery Grid (Anime.js Kinetic Physics Cards) */}
@@ -222,7 +129,7 @@ export function SuasanaKampusGallery() {
           ref={galleryRef}
           className="mt-14 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 perspective-1000"
         >
-          {filteredData.map((item, index) => (
+          {previewData.map((item, index) => (
             <div
               key={item.id}
               ref={(el) => {
@@ -250,13 +157,6 @@ export function SuasanaKampusGallery() {
                 <div className="absolute top-3 right-3 flex size-9 items-center justify-center rounded-xl bg-forest-deep/70 backdrop-blur-md text-cream opacity-0 group-hover:opacity-100 transition-all duration-300 group-hover:scale-110">
                   <Maximize2 size={16} />
                 </div>
-
-                <div className="absolute bottom-3 left-3">
-                  <span className="inline-flex items-center gap-1.5 rounded-lg bg-rust/90 px-3 py-1 text-[11px] font-bold text-cream backdrop-blur-md shadow-sm">
-                    <Tag size={12} />
-                    {item.categoryLabel}
-                  </span>
-                </div>
               </div>
 
               {/* Card Meta & Caption */}
@@ -275,17 +175,22 @@ export function SuasanaKampusGallery() {
                     {item.description}
                   </p>
                 </div>
-
-                <div className="mt-4 flex items-center justify-between border-t border-cream/15 pt-3">
-                  <span className="text-xs font-bold text-rust group-hover:underline flex items-center gap-1">
-                    Lihat Dokumentasi <ChevronRight size={14} />
-                  </span>
-                  <Sparkles size={16} className="text-sand/50 group-hover:text-sand transition-colors" />
-                </div>
               </div>
             </div>
           ))}
         </div>
+
+        {preview && filteredData.length > previewData.length && (
+          <div className="mt-10 flex justify-center">
+            <Link
+              href="/gallery"
+              className="inline-flex items-center gap-2 rounded-full bg-rust px-6 py-3 text-sm font-extrabold text-cream shadow-lg shadow-rust/25 transition-all hover:-translate-y-0.5 hover:bg-rust/90"
+            >
+              Lihat semua foto di Gallery
+              <ChevronRight size={17} />
+            </Link>
+          </div>
+        )}
       </div>
 
       {/* Lightbox Modal (Enlarged Image & Details) */}
@@ -325,13 +230,8 @@ export function SuasanaKampusGallery() {
 
                 <div className="md:col-span-5 flex flex-col justify-between h-full">
                   <div>
-                    <div className="flex items-center gap-2 mb-3">
-                      <span className="rounded-md bg-rust px-3 py-1 text-xs font-bold text-cream">
-                        {activeItem.categoryLabel}
-                      </span>
-                      <span className="flex items-center gap-1.5 text-xs text-sand font-semibold">
-                        <Calendar size={13} /> {activeItem.date}
-                      </span>
+                    <div className="mb-3 flex items-center gap-1.5 text-xs font-semibold text-sand">
+                      <Calendar size={13} /> {activeItem.date}
                     </div>
 
                     <h3 className="font-display text-2xl sm:text-3xl text-cream leading-tight">
