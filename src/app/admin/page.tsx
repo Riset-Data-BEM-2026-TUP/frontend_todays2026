@@ -14,6 +14,8 @@ import {
 import { apiFetch } from '@/lib/api/client';
 import { AdminManager, type Resource } from '@/components/admin/admin-manager';
 
+export const dynamic = 'force-dynamic';
+
 type AdminUser = {
   id: string;
   email: string;
