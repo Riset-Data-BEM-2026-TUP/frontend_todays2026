@@ -107,7 +107,7 @@ export function Hero({ tagline }: { tagline?: string }) {
               href="/timeline"
               className="inline-flex min-h-[50px] items-center justify-center rounded-full border border-forest-deep/35 px-8 py-3.5 text-base font-semibold text-forest-deep hover:bg-forest-deep/10 hover:border-forest-deep/70 backdrop-blur-md transition-all duration-300"
             >
-              Jelajahi Website &rarr;
+              Jelajahi Website
             </Link>
           </motion.div>
         </motion.div>

@@ -94,8 +94,8 @@ export function TimelineList({ limit }: { limit?: number }) {
             <div className="mt-3.5 rounded-2xl border border-sand/50 bg-cream/70 p-4 max-w-xl">
               <p className="text-xs font-bold uppercase tracking-wider text-rust mb-2">Hal yang Perlu Dibawa / Dipersiapkan:</p>
               <ul className="space-y-1.5 text-sm text-forest/90 font-medium">
-                {e.checklistItems.map((c) => (
-                  <li key={c} className="flex items-center gap-2.5">
+                {e.checklistItems.map((c, index) => (
+                  <li key={`${e.id}-checklist-${index}`} className="flex items-center gap-2.5">
                     <span className="size-2 rounded-full bg-rust shrink-0" />
                     {c}
                   </li>

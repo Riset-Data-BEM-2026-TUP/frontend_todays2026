@@ -194,10 +194,6 @@ export function GuidebookReader() {
 
       {/* Header Banner Page Title */}
       <div className="mb-10 text-center max-w-3xl mx-auto">
-        <div className="inline-flex items-center gap-2 rounded-full border border-sand/40 bg-sand/15 px-4 py-1.5 text-xs font-bold uppercase tracking-widest text-forest-deep mb-3 backdrop-blur-md">
-          <BookOpen size={14} className="text-rust" />
-          <span>Panduan Resmi PKKMB 2026</span>
-        </div>
         <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl text-forest-deep drop-shadow-sm">
           Guidebook PKKMB
         </h1>

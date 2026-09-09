@@ -115,10 +115,7 @@ export function PinnedAboutSection({
                 style={{ opacity: step.opacity, y: step.y }}
                 className="absolute inset-0 flex flex-col justify-center rounded-3xl border border-cream/20 bg-cream/10 p-8 sm:p-10 backdrop-blur-xl shadow-2xl"
               >
-                <div className="flex items-center justify-between border-b border-cream/15 pb-4 mb-4">
-                  <span className="font-display text-xs font-extrabold uppercase tracking-widest text-rust">
-                    NILAI DASAR BHUMARA
-                  </span>
+                <div className="flex items-center justify-end border-b border-cream/15 pb-4 mb-4">
                   <span className="font-display text-2xl font-black text-sage/80">{step.num}</span>
                 </div>
                 <h3 className="font-display text-3xl sm:text-4xl font-black text-cream">
