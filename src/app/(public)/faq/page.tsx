@@ -4,6 +4,7 @@ import { AnimatedSection, TextReveal } from '@/components/ui/animated-section';
 import { PageDecor } from '@/components/ui/jungle-decor';
 
 export const metadata: Metadata = { title: 'FAQ' };
+export const dynamic = 'force-dynamic';
 
 export default function FaqPage() {
   return (

@@ -11,6 +11,8 @@ export const metadata = {
   description: 'Jelajahi kampus Telkom University Purwokerto secara virtual di dunia metaverse Roblox.',
 };
 
+export const dynamic = 'force-dynamic';
+
 const quests = [
   {
     title: 'Eksplorasi Gedung Rektorat',

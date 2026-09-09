@@ -7,6 +7,8 @@ export const metadata: Metadata = {
     'Buku panduan digital resmi peserta PKKMB BHUMARA Telkom University Purwokerto 2026. Berisi jadwal, atribut, tata tertib, denah kampus, dan kontak penting.',
 };
 
+export const dynamic = 'force-dynamic';
+
 export default function GuidebookPage() {
   return (
     <main className="min-h-screen bg-sage/10 relative overflow-hidden py-6 sm:py-10">
