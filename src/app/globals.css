@@ -2,25 +2,28 @@
 @tailwind components;
 @tailwind utilities;
 
-/* ===== Design tokens BHUMARA (palette SEKUNDER resmi) =====
+/* ===== Design tokens BHUMARA — TEMA "READY / GROWING TODAY" (langit) =====
+   Diselaraskan dgn Figma: langit biru (#55A4EE→#55C0EE), awan putih, judul emas
+   (#FEFF73→#FFAE3B), teks gelap (#1B120F). Nama token dipertahankan (sage/forest/…)
+   agar SELURUH komponen ikut berubah otomatis, hanya NILAI-nya yang di-retheme.
    Ditulis sebagai channel RGB agar bisa dipakai dengan alpha Tailwind. */
 :root {
-  --sage: 156 175 136;        /* #9CAF88 */
-  --forest: 101 112 74;       /* #65704A */
-  --forest-deep: 62 69 48;    /* #3E4530  (turunan gelap = primer sementara) */
-  --cream: 243 233 210;       /* #F3E9D2 */
-  --sand: 205 185 138;        /* #CDB98A */
-  --rust: 180 106 50;         /* #B46A32  (CTA / highlight) */
-  --ink: 38 42 28;            /* teks utama di atas cream */
+  --sage: 143 208 245;        /* #8FD0F5  langit muda (tint section) */
+  --forest: 63 107 134;       /* #3F6B86  biru-slate (teks/ikon sekunder, kontras ≥4.5) */
+  --forest-deep: 8 51 77;     /* #08334D  biru tua (heading / section gelap / footer) */
+  --cream: 240 249 255;       /* #F0F9FF  permukaan terang (bg/kartu) */
+  --sand: 186 230 253;        /* #BAE6FD  border langit lembut */
+  --rust: 194 86 15;          /* #C2560F  adventure amber-orange (CTA, teks putih aman ≥4.5) */
+  --ink: 12 74 110;           /* #0C4A6E  teks utama di atas permukaan terang */
 
   --font-display: 'Spicy Rice';
-  --font-body: 'Noto Serif';
+  --font-body: 'Baloo 2';
 }
 
 .dark {
-  --cream: 26 30 20;
-  --ink: 235 232 220;
-  --sand: 120 108 78;
+  --cream: 12 34 51;          /* #0C2233  night sky */
+  --ink: 224 240 252;
+  --sand: 45 82 116;
 }
 
 html {
@@ -45,20 +48,24 @@ html.lenis, html.lenis body {
 
 body {
   background-color: rgb(var(--cream));
-  /* Pola dedaunan berulang sebagai tekstur latar, SANGAT dipudarkan:
-     overlay cream ~93% ditumpuk di atas gambar → pola hanya samar-samar (±7%).
-     Pakai Rectangle-vtile.png = Rectangle.png + salinan flip-vertikal di bawahnya,
-     sehingga tiap baris berselang-seling ter-flip & MENYAMBUNG mulus ke bawah.
-     Pakai token --cream agar ikut menyesuaikan di dark mode. */
+  /* Latar LANGIT: gradient biru-muda di atas memudar ke permukaan terang di bawah,
+     menempel (fixed) agar terasa seperti langit membentang di seluruh halaman.
+     Pakai token agar ikut menyesuaikan di dark mode (night sky). */
   background-image:
-    linear-gradient(rgb(var(--cream) / 0.93), rgb(var(--cream) / 0.93)),
-    url('/images/decorations/Rectangle-vtile.png');
-  background-repeat: repeat;
-  background-size: 300px auto;
+    linear-gradient(
+      180deg,
+      rgb(var(--sage) / 0.75) 0%,
+      rgb(var(--sage) / 0.35) 28%,
+      rgb(var(--cream)) 60%,
+      rgb(var(--cream)) 100%
+    );
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: 100% 100%;
   color: rgb(var(--ink));
-  font-family: var(--font-body), Georgia, 'Times New Roman', serif;
-  /* Noto Serif = serif: butuh leading lebih longgar di layar (best practice 1.5–1.75) */
-  line-height: 1.7;
+  font-family: var(--font-body), ui-rounded, 'Segoe UI', system-ui, sans-serif;
+  /* Baloo 2 = sans membulat: leading 1.55 nyaman & playful (best practice ≥1.5) */
+  line-height: 1.55;
   /* Cegah scroll horizontal dari lapisan dekor full-bleed (w-screen). */
   overflow-x: clip;
   -webkit-font-smoothing: antialiased;
@@ -78,11 +85,32 @@ body {
     font-weight: 400 !important;
   }
 
-  /* Teks bacaan (paragraf) dengan Noto Serif tetap nyaman & konsisten */
+  /* Teks bacaan (paragraf) dengan Baloo 2 — nyaman & konsisten */
   p {
-    line-height: 1.7;
+    line-height: 1.55;
   }
 }
+
+/* Judul "bubbly" emas ala Figma READY: isian gradient kuning→amber + outline gelap
+   + bayangan tebal. Dipakai untuk headline hero. */
+.text-bubbly {
+  background-image: linear-gradient(180deg, #feff73 24%, #ffae3b 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-stroke: clamp(2px, 0.4vw, 5px) #4c5a1e;
+  paint-order: stroke fill;
+  filter: drop-shadow(0 6px 0 rgba(76, 90, 30, 0.35)) drop-shadow(0 12px 22px rgba(0, 0, 0, 0.25));
+  letter-spacing: 0.02em;
+}
+
+/* Awan CSS lembut (dipakai bila tanpa 3D) */
+@keyframes bhumara-drift {
+  from { transform: translateX(-8%); }
+  to { transform: translateX(8%); }
+}
+.animate-drift { animation: bhumara-drift 24s ease-in-out infinite alternate; }
+@media (prefers-reduced-motion: reduce) { .animate-drift { animation: none; } }
 
 /* Pola latar belakang halus */
 .bhumara-pattern-bg {
@@ -99,4 +127,81 @@ body {
 .no-scrollbar {
   -ms-overflow-style: none;
   scrollbar-width: none;
+}
+
+/* =====================================================================
+   DEKOR TEMA LANGIT (pattern & tekstur) — selaras Figma PKKMB "The New Icon":
+   langit + awan, pola cincin radar (frame Timeline), titik halus.
+   Semua dibuat halus/low-opacity agar tak mengganggu keterbacaan konten.
+   ===================================================================== */
+
+/* Awan lembut bertekstur (beberapa radial gradient putih transparan). */
+.pattern-clouds {
+  background-image:
+    radial-gradient(60px 38px at 18% 28%, rgba(255, 255, 255, 0.55), transparent 70%),
+    radial-gradient(90px 52px at 68% 22%, rgba(255, 255, 255, 0.45), transparent 72%),
+    radial-gradient(70px 44px at 42% 66%, rgba(255, 255, 255, 0.40), transparent 70%),
+    radial-gradient(110px 60px at 86% 72%, rgba(255, 255, 255, 0.35), transparent 72%);
+  background-repeat: no-repeat;
+}
+
+/* Pola cincin konsentris (radar) — aksen seperti frame Timeline Figma. */
+.pattern-rings {
+  background-image: repeating-radial-gradient(
+    circle at center,
+    rgb(var(--forest) / 0.07) 0,
+    rgb(var(--forest) / 0.07) 1.5px,
+    transparent 1.5px,
+    transparent 36px
+  );
+}
+
+/* Titik halus (dotted grid). */
+.pattern-dots {
+  background-image: radial-gradient(rgb(var(--forest) / 0.12) 1.2px, transparent 1.2px);
+  background-size: 22px 22px;
+}
+
+/* Tekstur awan langit halus untuk KARTU: tint sage di pojok via background-image
+   (menumpuk di atas warna latar kartu, selalu di BELAKANG konten → aman keterbacaan).
+   Dipakai dengan menambah kelas `card-clouds` pada kartu ber-latar terang. */
+.card-clouds {
+  background-image:
+    radial-gradient(100px 64px at 88% 6%, rgb(var(--sage) / 0.30), transparent 70%),
+    radial-gradient(130px 78px at 4% 98%, rgb(var(--sage) / 0.22), transparent 72%);
+}
+/* Varian untuk kartu ber-latar gelap (forest-deep): tint cream lembut. */
+.card-clouds-dark {
+  background-image:
+    radial-gradient(110px 70px at 90% 8%, rgb(var(--cream) / 0.08), transparent 70%),
+    radial-gradient(140px 84px at 4% 96%, rgb(var(--cream) / 0.06), transparent 72%);
+}
+
+/* Grid garis tipis (blueprint langit). */
+.pattern-grid {
+  background-image:
+    linear-gradient(to right, rgb(var(--forest) / 0.06) 1px, transparent 1px),
+    linear-gradient(to bottom, rgb(var(--forest) / 0.06) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+/* Animasi dekor langit (transform-only, hemat & mulus). */
+@keyframes sky-drift-x {
+  from { transform: translate3d(-5%, 0, 0); }
+  to { transform: translate3d(5%, 0, 0); }
+}
+@keyframes sky-float-y {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-14px); }
+}
+@keyframes sky-twinkle {
+  0%, 100% { opacity: 0.25; transform: scale(0.9); }
+  50% { opacity: 0.6; transform: scale(1); }
+}
+.animate-sky-drift { animation: sky-drift-x 30s ease-in-out infinite alternate; }
+.animate-sky-float { animation: sky-float-y 6s ease-in-out infinite; }
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-sky-drift,
+  .animate-sky-float { animation: none; }
 }
