@@ -1,20 +1,22 @@
 import type { Metadata, Viewport } from 'next';
-import { Spicy_Rice, Noto_Serif } from 'next/font/google';
+import { Spicy_Rice, Baloo_2 } from 'next/font/google';
 import './globals.css';
 import { Providers } from '@/providers';
 import { Navbar } from '@/components/layout/navbar';
 import { Footer } from '@/components/layout/footer';
+import { SiteChrome } from '@/components/layout/site-chrome';
 import { SplashScreen } from '@/components/ui/splash-screen';
 import { DevServiceWorkerCleaner } from '@/components/ui/dev-sw-cleaner';
 import { ScrollProgressBar } from '@/components/ui/scroll-progress';
 import { PageTransition } from '@/components/ui/page-transition';
 import { SmoothScrollProvider } from '@/components/ui/smooth-scroll-provider';
-import { JungleCornersBottom } from '@/components/ui/jungle-decor';
+import { SkyBackdrop } from '@/components/ui/sky-scape';
 
-// Spicy Rice hanya punya satu weight (400) — font dekoratif untuk headline.
+
+// Spicy Rice (weight 400) — font dekoratif "bubbly" untuk headline besar (vibe Figma).
 const display = Spicy_Rice({ subsets: ['latin'], variable: '--font-display', weight: ['400'] });
-// Noto Serif untuk body text (mendukung banyak weight).
-const body = Noto_Serif({ subsets: ['latin'], variable: '--font-body', weight: ['400', '500', '600', '700'] });
+// Baloo 2 — sans membulat & ramah untuk body text (playful/edukatif, selaras tema langit).
+const body = Baloo_2({ subsets: ['latin'], variable: '--font-body', weight: ['400', '500', '600', '700'] });
 
 export const metadata: Metadata = {
   title: { default: 'BHUMARA — PKKMB Telkom University Purwokerto 2026', template: '%s — BHUMARA' },
@@ -44,7 +46,7 @@ export const metadata: Metadata = {
   },
 };
 
-export const viewport: Viewport = { themeColor: '#65704A' };
+export const viewport: Viewport = { themeColor: '#55B0EE' };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -52,18 +54,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body>
         <Providers>
           <SmoothScrollProvider>
+            <SkyBackdrop />
             <ScrollProgressBar />
+
             <DevServiceWorkerCleaner />
             <SplashScreen />
-            <Navbar />
-            <main>
+            <SiteChrome navbar={<Navbar />} footer={<Footer />}>
               <PageTransition>{children}</PageTransition>
-            </main>
-            {/* Dedaunan sudut duduk tepat di ATAS footer */}
-            <div className="relative h-0">
-              <JungleCornersBottom />
-            </div>
-            <Footer />
+            </SiteChrome>
           </SmoothScrollProvider>
         </Providers>
       </body>
