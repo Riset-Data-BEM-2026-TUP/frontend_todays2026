@@ -8,8 +8,8 @@ export const metadata: Metadata = {
     'Direktori Organisasi Kemahasiswaan & Unit Kegiatan Mahasiswa Telkom University Purwokerto.',
 };
 
-// ISR: ambil dari backend, revalidate berkala (data dari DB, bukan hardcoded).
-export const revalidate = 300;
+// Render dinamis agar data Ormawa selalu diambil dari backend/database saat request.
+export const dynamic = 'force-dynamic';
 
 type OrmawaApi = {
   id: string;
