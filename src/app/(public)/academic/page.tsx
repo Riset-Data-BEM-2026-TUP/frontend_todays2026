@@ -1,40 +1,53 @@
 import type { Metadata } from 'next';
-import { ExpandingAcademicGrid } from '@/components/academic/expanding-academic-grid';
-import { AnimatedSection, TextReveal } from '@/components/ui/animated-section';
-import { PageDecor } from '@/components/ui/jungle-decor';
+import { SimpleDirectory, type SimpleDirectoryItem } from '@/components/pionirpedia/simple-directory';
+import { API_URL } from '@/lib/config';
 
 export const metadata: Metadata = {
-  title: 'Platform Akademik - TODAYS 2026',
+  title: 'Platform Akademik - PKKMB 2026',
   description: 'Panduan portal akademik iGracias, CeLOE LMS, TelU Open Library, dan aplikasi mobile mahasiswa.',
 };
 
-export default function AcademicPage() {
+export const revalidate = 300;
+
+type AcademicApi = {
+  id: string;
+  nama: string;
+  kategori: string;
+  url?: string | null;
+  deskripsi?: string | null;
+  deskripsiLengkap?: string | null;
+  fiturUtama?: string[] | null;
+};
+
+async function getAcademic(): Promise<AcademicApi[]> {
+  try {
+    const res = await fetch(`${API_URL}/academic`, { next: { revalidate: 300 } });
+    if (!res.ok) return [];
+    const json = await res.json();
+    return (json?.data as AcademicApi[]) ?? [];
+  } catch {
+    return [];
+  }
+}
+
+export default async function AcademicPage() {
+  const list = await getAcademic();
+  const items: SimpleDirectoryItem[] = list.map((a) => ({
+    id: a.id,
+    title: a.nama,
+    category: a.kategori,
+    summary: a.deskripsi ?? '',
+    description: a.deskripsiLengkap ?? a.deskripsi ?? '',
+    facts: a.fiturUtama && a.fiturUtama.length > 0 ? a.fiturUtama : undefined,
+    href: a.url ?? undefined,
+    hrefLabel: a.url ? 'Buka platform' : undefined,
+  }));
+
   return (
-    <div className="relative mx-auto max-w-6xl px-4 sm:px-6 pt-28 sm:pt-32 pb-32 sm:pb-40 min-h-dvh">
-      <PageDecor
-        critter="rusa"
-        critterClassName="absolute bottom-48 right-0 hidden h-52 w-auto opacity-100 drop-shadow-xl lg:block"
-      />
-
-      {/* Page Header */}
-      <AnimatedSection>
-        <div className="max-w-3xl">
-          <span className="font-display text-xs sm:text-sm font-extrabold uppercase tracking-widest text-rust">
-            SISTEM INFORMASI KAMPUS
-          </span>
-          <h1 className="mt-1 font-display text-4xl font-extrabold text-forest-deep sm:text-5xl lg:text-6xl leading-tight">
-            <TextReveal text="Platform Akademik" />
-          </h1>
-          <p className="mt-3.5 text-base sm:text-lg text-forest-deep font-semibold leading-relaxed">
-            Pusat akses resmi portal iGracias, e-learning CeLOE LMS, perpustakaan digital OpenLibrary, lisensi Office 365, dan aplikasi mobile mahasiswa Telkom University Purwokerto.
-          </p>
-        </div>
-      </AnimatedSection>
-
-      {/* Interactive Academic Grid & Details */}
-      <AnimatedSection delay={0.2} className="mt-12 min-h-[920px] pb-12">
-        <ExpandingAcademicGrid />
-      </AnimatedSection>
-    </div>
+    <SimpleDirectory
+      items={items}
+      backLabel="Platform Akademik"
+      overview="Kumpulan portal & aplikasi akademik resmi Telkom University Purwokerto — iGracias, CeLOE LMS, TelU Open Library, dan lainnya. Pilih kategori atau klik tiap kartu untuk melihat detail fitur dan tautan aksesnya."
+    />
   );
 }
