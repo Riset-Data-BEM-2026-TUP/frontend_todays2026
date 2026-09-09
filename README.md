@@ -368,3 +368,14 @@ docker run -d -p 3000:3000 --name bhumara-frontend-container bhumara-frontend
 ## Lisensi dan Hak Cipta
 
 Hak Cipta (c) 2026 **BEM Telkom University Purwokerto & Tim Pengembang PKKMB BHUMARA 2026**. Seluruh Hak Dilindungi Undang-Undang.
+
+## Deployment (Vercel)
+
+Frontend di-deploy di Vercel (Next.js SSR).
+
+Environment variable:
+
+- `NEXT_PUBLIC_API_URL` — URL publik backend, mis. `https://host/api/v1`
+
+Catatan: output `standalone` hanya untuk Docker/VPS (diaktifkan lewat
+`NEXT_OUTPUT_STANDALONE=true`); di Vercel biarkan default.

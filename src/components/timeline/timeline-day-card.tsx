@@ -1,6 +1,6 @@
 'use client';
 
-import { Clock, MapPin, ChevronRight } from 'lucide-react';
+import { Clock, ChevronRight } from 'lucide-react';
 import type { DayTimelineData } from './timeline-data';
 
 interface TimelineDayCardProps {
@@ -27,7 +27,7 @@ export function TimelineDayCard({ day, onClick, isEven }: TimelineDayCardProps) 
           onClick(rect);
         }
       }}
-      className={`day-grid-card group relative grid cursor-pointer overflow-hidden rounded-2xl border transition-all duration-300 ${
+      className={`card-clouds day-grid-card group relative grid cursor-pointer overflow-hidden rounded-2xl border transition-all duration-300 ${
         isEven
           ? 'border-forest/20 bg-cream/90 hover:bg-cream hover:border-rust/40'
           : 'border-sage/30 bg-sage/15 hover:bg-sage/25 hover:border-forest/40'
@@ -57,10 +57,6 @@ export function TimelineDayCard({ day, onClick, isEven }: TimelineDayCardProps) 
           <span className="inline-flex items-center gap-2">
             <Clock className="size-4 text-rust shrink-0" />
             <span>{day.timeRange}</span>
-          </span>
-          <span className="inline-flex items-center gap-2">
-            <MapPin className="size-4 text-rust shrink-0" />
-            <span>{day.location}</span>
           </span>
         </div>
       </div>

@@ -13,10 +13,7 @@ export default function FaqPage() {
         critterClassName="absolute bottom-48 left-0 hidden h-52 w-auto opacity-100 drop-shadow-xl lg:block"
       />
       <AnimatedSection>
-        <span className="font-display text-xs font-bold uppercase tracking-widest text-rust">
-          INFORMASI & BANTUAN
-        </span>
-        <h1 className="mt-1 font-display text-4xl font-extrabold text-forest-deep sm:text-5xl">
+        <h1 className="font-display text-4xl font-extrabold text-forest-deep sm:text-5xl">
           <TextReveal text="Pertanyaan Umum (FAQ)" />
         </h1>
         <p className="mt-3 text-lg text-forest/80 font-medium leading-relaxed max-w-2xl">

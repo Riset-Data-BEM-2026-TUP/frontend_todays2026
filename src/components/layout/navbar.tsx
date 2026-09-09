@@ -11,7 +11,8 @@ const links = [
   { href: '/timeline', label: 'Timeline' },
   { href: '/explore-ormawa', label: 'Ormawa' },
   { href: '/academic', label: 'Akademik' },
-  { href: '/campus-tour', label: 'Campus Tour' },
+  { href: '/gallery', label: 'Gallery' },
+  { href: '/cari-kelompok', label: 'Kelompok' },
   { href: '/faq', label: 'FAQ' },
   { href: '/contact', label: 'Kontak' },
 ];
@@ -33,13 +34,13 @@ export function Navbar() {
           {/* Logo & Brand Name */}
           <motion.div whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.96 }}>
             <Link href="/" className="flex items-center gap-2.5 font-display text-lg sm:text-xl text-forest-deep">
-              <Image src="/logo-pkkmb.png" alt="BHUMARA" width={30} height={30} className="drop-shadow-sm" />
-              <span>BHUMARA</span>
+              <Image src="/logo-pkkmb.png" alt="PKKMB" width={30} height={30} className="drop-shadow-sm" />
+              <span>PKKMB</span>
             </Link>
           </motion.div>
 
           {/* Desktop Navigation Links (Underline Hover Fill terinspirasi PIONIR UGM) */}
-          <div className="hidden items-center gap-7 md:flex">
+          <div className="hidden items-center gap-5 md:flex">
             {links.map((l) => {
               const isActive = pathname === l.href;
               return (

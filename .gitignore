@@ -10,6 +10,8 @@
 /.next/
 /out/
 /build
+# next-env.d.ts di-generate otomatis oleh Next.js → jangan di-commit
+next-env.d.ts
 next-env.d.ts.timestamp
 *.tsbuildinfo
 
@@ -59,3 +61,7 @@ Thumbs.db
 
 # ===== Vercel =====
 .vercel
+
+# ===== Dokumen — hanya README.md yang boleh di-commit =====
+*.md
+!README.md
