@@ -124,7 +124,7 @@ export function FaqAccordion() {
           return (
             <div
               key={f.id}
-              className={`overflow-hidden rounded-2xl border transition-colors duration-300 transform-gpu ${
+              className={`card-clouds overflow-hidden rounded-2xl border transition-colors duration-300 transform-gpu ${
                 isOpen
                   ? 'border-rust/50 bg-cream shadow-md'
                   : isEven

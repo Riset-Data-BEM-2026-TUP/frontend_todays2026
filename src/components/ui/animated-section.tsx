@@ -143,7 +143,7 @@ export function GlowCard({
       whileHover={{ y: -6, scale: 1.025 }}
       whileTap={{ scale: 0.96, rotate: -0.5 }}
       transition={{ type: 'spring', stiffness: 380, damping: 22 }}
-      className={`relative ${corner ? 'overflow-visible' : 'overflow-hidden'} rounded-2xl border border-sand/60 bg-cream p-6 shadow-sm transition-colors duration-300 hover:border-rust/70 hover:shadow-xl ${className}`}
+      className={`card-clouds relative ${corner ? 'overflow-visible' : 'overflow-hidden'} rounded-2xl border border-sand/60 bg-cream p-6 shadow-sm transition-colors duration-300 hover:border-rust/70 hover:shadow-xl ${className}`}
     >
       {/* Aksen tumbuhan menempel di TEPI KANAN kartu sendiri, menjuntai ke dalam, dan
           pop-out (tidak di-clip) ke ATAS. Di belakang konten. */}
@@ -151,10 +151,10 @@ export function GlowCard({
         <Decor name={corner} className="absolute right-0 -top-6 w-36 opacity-95 sm:w-40" />
       )}
 
-      {/* Dynamic Mouse Spotlight Glow */}
+      {/* Dynamic Mouse Spotlight Glow (Must be rounded-2xl to match card border-radius) */}
       {isHovered && (
         <div
-          className="pointer-events-none absolute -inset-px transition-opacity duration-300"
+          className="pointer-events-none absolute -inset-px rounded-2xl transition-opacity duration-300"
           style={{
             background: `radial-gradient(400px circle at ${mousePos.x}px ${mousePos.y}px, rgba(180, 106, 50, 0.12), transparent 80%)`,
           }}
