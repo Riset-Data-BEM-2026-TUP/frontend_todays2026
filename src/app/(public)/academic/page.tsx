@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   description: 'Panduan portal akademik iGracias, CeLOE LMS, TelU Open Library, dan aplikasi mobile mahasiswa.',
 };
 
-export const revalidate = 300;
+export const dynamic = 'force-dynamic';
 
 type AcademicApi = {
   id: string;

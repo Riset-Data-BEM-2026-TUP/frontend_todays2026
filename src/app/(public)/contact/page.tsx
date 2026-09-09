@@ -9,7 +9,7 @@ export const metadata: Metadata = {
   description: 'Hubungi panitia PKKMB BHUMARA 2026 dan temukan lokasi kampus Telkom University Purwokerto.',
 };
 
-export const revalidate = 300;
+export const dynamic = 'force-dynamic';
 
 const primaryBtn =
   'inline-flex items-center justify-center gap-2 rounded-full bg-rust px-5 py-2.5 text-sm font-bold text-cream shadow-md shadow-rust/25 transition-all hover:scale-[1.02] hover:bg-rust/90';

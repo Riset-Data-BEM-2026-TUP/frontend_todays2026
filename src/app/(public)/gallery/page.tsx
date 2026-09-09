@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   description: 'Galeri suasana, fasilitas, dan lingkungan kampus Telkom University Purwokerto.',
 };
 
-export const revalidate = 300;
+export const dynamic = 'force-dynamic';
 
 export default async function GalleryPage() {
   const items = await getGalleryCampus();
