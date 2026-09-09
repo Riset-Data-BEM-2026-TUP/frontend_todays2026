@@ -2,6 +2,8 @@ import Image from 'next/image';
 import { PageDecor } from '@/components/ui/jungle-decor';
 
 export const metadata = { title: 'Quiz PKKMB' };
+export const dynamic = 'force-dynamic';
+
 export default function Page() {
   return (
     <div className="relative mx-auto max-w-3xl px-4 pt-28 pb-20">

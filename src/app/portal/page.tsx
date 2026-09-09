@@ -19,6 +19,8 @@ import {
 import { apiFetch } from '@/lib/api/client';
 import { PageDecor } from '@/components/ui/jungle-decor';
 
+export const dynamic = 'force-dynamic';
+
 type MabaUser = {
   id: string;
   email: string;
