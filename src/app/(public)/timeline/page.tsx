@@ -11,7 +11,7 @@ export const metadata: Metadata = {
     'Simpan rute empat hari orientasi, lokasi kegiatan, dresscode, dan rundown agenda PKKMB BHUMARA 2026.',
 };
 
-export const revalidate = 300;
+export const dynamic = 'force-dynamic';
 
 const BULAN = ['Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'];
 

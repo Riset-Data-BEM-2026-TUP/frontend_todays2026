@@ -16,7 +16,7 @@ import {
   RippleRings,
 } from '@/components/ui/sky-scape';
 
-export const revalidate = 60;
+export const dynamic = 'force-dynamic';
 
 type Preview = { id: string; nama: string; kategori?: string | null; logoUrl?: string | null; deskripsi?: string | null };
 
